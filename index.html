@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kurt Randall S. Oviedo - Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --accent:#00ffe7;
+      --accent2:#00b3ff;
+      --text:#f4f4f4;
+      --muted:#cfcfcf;
+
+      --glass:rgba(10,14,20,.34);
+      --glass-strong:rgba(10,14,20,.48);
+
+      --stroke:rgba(0,255,231,.20);
+      --shadow:0 16px 44px rgba(0,0,0,.55);
+      --shadow-soft:0 12px 28px rgba(0,0,0,.45);
+      --glow:0 0 0 10px rgba(0,255,231,.06);
+      --glow-strong:0 18px 60px rgba(0,255,231,.22);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: url('vecteezy_abstract-luxury-glowing-lines-curved-overlapping-on-dark_11545805.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: var(--text);
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    body::before{
+      content:"";
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(800px 520px at 18% 18%, rgba(0,255,231,.12), transparent 60%),
+        radial-gradient(900px 620px at 82% 78%, rgba(0,179,255,.12), transparent 60%),
+        linear-gradient(to bottom, rgba(0,0,0,.35), rgba(0,0,0,.70));
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    /* ===== Header ===== */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: .9rem 1.2rem;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+
+      background: rgba(10,14,20,.22);
+      border-bottom: 1px solid rgba(255,255,255,.06);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+
+      transition: background .25s ease, box-shadow .25s ease, transform .25s ease;
+      box-shadow: 0 10px 26px rgba(0,0,0,.22);
+    }
+
+    .logo {
+      font-weight: 800;
+      font-size: 1.12rem;
+      color: var(--accent);
+      letter-spacing: .4px;
+      text-shadow: 0 0 18px rgba(0,255,231,.22);
+      user-select: none;
+      white-space: nowrap;
+    }
+
+    nav{
+      display:flex;
+      gap: .55rem;
+      align-items:center;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    nav a {
+      padding: .48rem .78rem;
+      border-radius: 999px;
+      text-decoration: none;
+      color: rgba(255,255,255,.92);
+      font-weight: 600;
+      font-size: .95rem;
+      position: relative;
+      border: 1px solid rgba(255,255,255,.06);
+      background: rgba(255,255,255,.04);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      transition: transform .2s ease, background .2s ease, border-color .2s ease;
+    }
+
+    nav a:hover{
+      transform: translateY(-1px);
+      background: rgba(0,255,231,.10);
+      border-color: rgba(0,255,231,.18);
+    }
+
+    nav a.active{
+      background: rgba(0,255,231,.16);
+      border-color: rgba(0,255,231,.28);
+      color: #eafffd;
+      box-shadow: 0 10px 24px rgba(0,255,231,.10);
+    }
+
+    /* ===== Sections ===== */
+    .section {
+      min-height: 100vh;
+      padding: 7.2rem 1.4rem 3rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    #contact.section {
+      min-height: auto;
+      padding: 4.5rem 1.4rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Scroll reveal */
+    .reveal{
+      opacity: 0;
+      transform: translateY(26px);
+      transition: opacity .8s ease, transform .8s ease;
+    }
+    .reveal.show{
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ===== Hero ===== */
+    .hero{
+      gap: 1rem;
+    }
+
+    .hero-badge{
+      display:inline-flex;
+      gap:.5rem;
+      align-items:center;
+      padding: .5rem .9rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.08);
+      background: rgba(10,14,20,.28);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      color: rgba(255,255,255,.90);
+      box-shadow: var(--shadow-soft);
+      margin-bottom: .9rem;
+    }
+    .hero-badge .dot{
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: linear-gradient(to right, var(--accent), var(--accent2));
+      box-shadow: 0 0 0 6px rgba(0,255,231,.08);
+    }
+
+    .hero h1 {
+      font-size: clamp(2.35rem, 5vw, 3.8rem);
+      margin-bottom: .55rem;
+      background: linear-gradient(to right, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 22px rgba(0,255,231,.12);
+      letter-spacing: .5px;
+      line-height: 1.05;
+    }
+
+    .hero p {
+      font-size: clamp(1.02rem, 2.2vw, 1.35rem);
+      margin-bottom: 1.55rem;
+      color: rgba(255,255,255,.82);
+    }
+
+    .hero-actions{
+      display:flex;
+      gap:.8rem;
+      flex-wrap: wrap;
+      justify-content:center;
+      align-items:center;
+      margin-top: .2rem;
+    }
+
+    .profile-img {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 1.1rem;
+      border: 4px solid rgba(0,255,231,.9);
+      box-shadow: var(--glow), 0 18px 45px rgba(0,0,0,.55);
+      transition: transform .35s ease, box-shadow .35s ease, filter .35s ease;
+      animation: floaty 4.8s ease-in-out infinite;
+    }
+
+    @keyframes floaty{
+      0%,100%{ transform: translateY(0); }
+      50%{ transform: translateY(-10px); }
+    }
+
+    .profile-img:hover {
+      transform: scale(1.06);
+      filter: saturate(1.1);
+      box-shadow: var(--glow), var(--glow-strong), 0 22px 55px rgba(0,0,0,.60);
+    }
+
+    /* ===== Cards ===== */
+    .about-container {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(260px, 1fr));
+      gap: 1.3rem;
+      justify-content: center;
+      align-items: stretch;
+      width: min(1100px, 100%);
+    }
+
+    @media (max-width: 900px){
+      .about-container{ grid-template-columns: 1fr; }
+    }
+
+    .card{
+      background: linear-gradient(180deg, rgba(10,14,20,.32), rgba(10,14,20,.20));
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      padding: 1.7rem;
+      border-radius: 22px;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(255,255,255,.07);
+      position: relative;
+      overflow: hidden;
+      transition: transform .28s ease, box-shadow .28s ease, border-color .28s ease;
+      text-align: left;
+    }
+
+    .card::before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background:
+        radial-gradient(520px 220px at 18% 18%, rgba(0,255,231,.18), transparent 60%),
+        radial-gradient(520px 220px at 85% 85%, rgba(0,179,255,.12), transparent 62%);
+      opacity:.55;
+      pointer-events:none;
+    }
+
+    .card:hover{
+      transform: translateY(-6px);
+      box-shadow: var(--shadow), var(--glow-strong);
+      border-color: rgba(0,255,231,.18);
+    }
+
+    .card h2{
+      margin-bottom: .85rem;
+      color: var(--accent);
+      text-shadow: 0 0 18px rgba(0,255,231,.14);
+      font-size: 1.25rem;
+    }
+
+    .card p{
+      color: rgba(255,255,255,.86);
+      line-height: 1.65;
+    }
+
+    .card ul{
+      margin-left: 1.05rem;
+      color: rgba(255,255,255,.86);
+      line-height: 1.65;
+    }
+    .card li{ margin: .38rem 0; }
+
+    /* ===== Buttons ===== */
+    .btn {
+      display: inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:.5rem;
+      background: linear-gradient(to right, var(--accent), #00c8b4);
+      color: #001010;
+      padding: 0.82rem 1.55rem;
+      border: none;
+      border-radius: 999px;
+      cursor: pointer;
+      font-weight: 800;
+      transition: transform .22s ease, filter .22s ease, box-shadow .22s ease;
+      box-shadow: 0 12px 28px rgba(0, 255, 231, 0.18);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      filter: saturate(1.05) brightness(1.02);
+      box-shadow: 0 18px 38px rgba(0, 255, 231, 0.24);
+    }
+
+    .btn-ghost{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding: 0.82rem 1.25rem;
+      border-radius: 999px;
+      text-decoration:none;
+      font-weight: 800;
+      color: rgba(255,255,255,.92);
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.05);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      transition: transform .22s ease, background .22s ease, border-color .22s ease;
+      white-space: nowrap;
+    }
+    .btn-ghost:hover{
+      transform: translateY(-2px);
+      background: rgba(0,255,231,.08);
+      border-color: rgba(0,255,231,.16);
+    }
+
+    /* ===== Projects ===== */
+    .projects h2{
+      color: var(--accent);
+      text-shadow: 0 0 18px rgba(0,255,231,.18);
+      margin-bottom: .25rem;
+    }
+    .projects .hint{
+      color: rgba(255,255,255,.78);
+      margin-top: .25rem;
+      font-size: 1rem;
+    }
+
+    .project-boxes {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.6rem;
+      justify-content: center;
+      margin-top: 2rem;
+      width: min(1200px, 100%);
+    }
+
+    .project-card{
+      width: 100%;
+      height: 280px;
+      border-radius: 26px;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      overflow: hidden;
+      text-decoration: none;
+      isolation: isolate;
+      transform-style: preserve-3d;
+      box-shadow: 0 14px 36px rgba(0,0,0,.55);
+      transition: transform .25s ease, box-shadow .25s ease, filter .25s ease;
+      border: 1px solid rgba(255,255,255,.06);
+    }
+
+    .project-card::before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      border-radius: 28px;
+      background: conic-gradient(from 180deg,
+        rgba(0,255,231,.0),
+        rgba(0,255,231,.75),
+        rgba(0,179,255,.75),
+        rgba(0,255,231,.0));
+      filter: blur(10px);
+      opacity: 0;
+      transition: opacity .35s ease;
+      animation: spinGlow 3.2s linear infinite;
+      z-index: -1;
+    }
+
+    @keyframes spinGlow{
+      to{ transform: rotate(360deg); }
+    }
+
+    .project-card::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background: radial-gradient(700px 320px at 50% 85%, rgba(0,0,0,.72), rgba(0,0,0,.10));
+      opacity: .92;
+      transition: opacity .35s ease;
+      z-index: 0;
+    }
+
+    .project-card .shine{
+      position:absolute;
+      inset:0;
+      background: linear-gradient(120deg,
+        transparent 0%,
+        rgba(255,255,255,.18) 35%,
+        transparent 70%);
+      transform: translateX(-140%);
+      transition: transform .75s ease;
+      z-index: 1;
+      pointer-events:none;
+    }
+
+    .project-card:hover{
+      box-shadow: 0 24px 70px rgba(0,255,231,.22), 0 18px 55px rgba(0,0,0,.55);
+      filter: saturate(1.1) contrast(1.05);
+    }
+    .project-card:hover::before{ opacity: 1; }
+    .project-card:hover::after{ opacity: .62; }
+    .project-card:hover .shine{ transform: translateX(140%); }
+
+    .overlay {
+      position: absolute;
+      left: 14px;
+      right: 14px;
+      bottom: 14px;
+      text-align: center;
+      padding: .85rem 1rem;
+      font-weight: 800;
+      font-size: 1.06rem;
+      letter-spacing: 0.35px;
+      z-index: 2;
+      color: rgba(255,255,255,.96);
+
+      background: rgba(10,14,20,.38);
+      border: 1px solid rgba(255,255,255,.08);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-radius: 16px;
+
+      box-shadow: 0 10px 24px rgba(0,0,0,.32);
+      transform: translateZ(45px);
+    }
+
+    /* ===== Footer ===== */
+    footer {
+      background: rgba(10,14,20,.22);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      padding: 1.6rem 1.2rem;
+      text-align: center;
+      color: rgba(255,255,255,.70);
+      font-size: 0.95rem;
+      border-top: 1px solid rgba(255,255,255,.06);
+      box-shadow: 0 -10px 26px rgba(0,0,0,.20);
+    }
+
+    /* ===== Lightbox (PDF viewer) ===== */
+    .lightbox{
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.85);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      z-index: 9999;
+      padding: 1.2rem;
+    }
+    .lightbox.show{ display:flex; }
+
+    .lb-inner{
+      width: min(1100px, 100%);
+      background: rgba(0,0,0,.45);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 18px;
+      overflow:hidden;
+      box-shadow: 0 30px 90px rgba(0,0,0,.65);
+    }
+    .lb-top{
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: .85rem 1rem;
+      background: rgba(18,18,18,.65);
+      border-bottom: 1px solid rgba(255,255,255,.06);
+      flex-wrap: wrap;
+    }
+    .lb-title{ font-weight: 900; color: var(--accent); text-shadow:0 0 18px rgba(0,255,231,.12); }
+    .lb-actions{ display:flex; gap: .5rem; }
+    .lb-btn{
+      padding:.55rem .8rem;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+      cursor:pointer;
+      font-weight:800;
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .lb-btn:hover{ background: rgba(0,255,231,.12); }
+
+    #lbPdf{
+      display:block;
+      width:100%;
+      height:78vh;
+      border:none;
+      background:#111;
+      overflow:auto;
+    }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 600px){
+      header{
+        padding: .85rem .9rem;
+      }
+      nav{
+        gap:.4rem;
+      }
+      nav a{
+        font-size: .9rem;
+        padding: .44rem .7rem;
+      }
+      .section{
+        padding: 7rem 1rem 2.5rem;
+      }
+      .profile-img{
+        width: 160px;
+        height: 160px;
+      }
+      .project-card{
+        height: 240px;
+      }
+      .overlay{
+        left: 12px; right: 12px; bottom: 12px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      *{ scroll-behavior: auto; }
+      .profile-img{ animation: none; }
+      .reveal{ transition: none; }
+      .project-card, .btn, nav a, header{ transition: none; }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="logo">Kurt Randall S. Oviedo</div>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <section class="section hero" id="home">
+    <div class="hero-badge reveal">
+      <span class="dot"></span>
+      <span>Graphic Designer • Visual Designer</span>
+    </div>
+
+    <img src="grad.jpg" alt="Kurt Randall S. Oviedo" class="profile-img reveal">
+    <h1 class="reveal">I'm Kurt Randall S. Oviedo</h1>
+    <p class="reveal">AI-powered design. Photoshop expert. Digital artist.</p>
+
+    <div class="hero-actions reveal">
+      <a class="btn" href="#projects">View Projects</a>
+      <a class="btn-ghost" href="#contact">Contact Me</a>
+    </div>
+  </section>
+
+  <section class="section" id="about">
+    <div class="about-container">
+      <div class="card reveal">
+        <h2>About Me</h2>
+        <p>
+          I’m a Graphic Artist specializing in creating eye-catching visuals for brands, businesses, and online content. I use AI-powered tools to enhance creativity and workflow, allowing me to produce innovative and high-quality designs efficiently. My main software is Adobe Photoshop, where I craft professional layouts, social media graphics, branding materials, and marketing visuals. I’m also highly skilled in digital art, creating detailed and expressive artworks with strong composition, lighting, and visual impact.
+        </p>
+        <br />
+        <!-- UPDATED: View Resume (PDF modal) -->
+        <button class="btn" id="viewResumeBtn" type="button">View Resume</button>
+      </div>
+
+      <div class="card reveal">
+        <h2>My Job Experience</h2>
+        <ul>
+          <li><strong>May 2025</strong> — Graphic AI Designer (Tailored Canvases Company – TellMyTale Website)</li>
+          <li><strong>Jan–Apr 2025</strong> — Graphic Designer & Social Media Manager (Digital Marketing Alive – DMA)</li>
+          <li><strong>Feb–May 2025</strong> — Information Technology Intern</li>
+          <li><strong>Apr–Dec 2024</strong> — Graphic Designer</li>
+          <li><strong>Jul–Aug 2024</strong> — Assistant Book Designer</li>
+          <li><strong>Sep–Dec 2024</strong> — Plushie Print Designer</li>
+          <li><strong>2020–2024</strong> — SPES (Special Program for Employment of Students)</li>
+          <li><strong>Jul–Oct 2022</strong> — Assistant Website Developer</li>
+          <li><strong>2020–2024</strong> — Virtual Assistant</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section projects" id="projects">
+    <h2 class="reveal">My Projects</h2>
+    <p class="hint reveal">Click a card to open the full project gallery.</p>
+
+    <div class="project-boxes">
+      <a href="artworks.html" class="project-card reveal" style="background-image: url('artworks/SPIDERMAN.png');" aria-label="Open Digital Artworks">
+        <div class="shine"></div>
+        <div class="overlay">Digital Artworks</div>
+      </a>
+
+      <a href="website.html" class="project-card reveal" style="background-image: url('image/276475359-42722076-97a7-41ae-b742-7a3981b1f2b8.gif');" aria-label="Open Website Projects">
+        <div class="shine"></div>
+        <div class="overlay">Website Projects</div>
+      </a>
+
+      <a href="logoposter.html" class="project-card reveal" style="background-image: url('images/Oviedo_Logo.png');" aria-label="Open Logo and Poster Projects">
+        <div class="shine"></div>
+        <div class="overlay">Logo / Poster etc.</div>
+      </a>
+
+      <a href="socialmedia.html" class="project-card reveal" style="background-image: url('images/1 post.png');" aria-label="Open Social Media Contents">
+        <div class="shine"></div>
+        <div class="overlay">Social Media Contents</div>
+      </a>
+    </div>
+  </section>
+
+  <section class="section" id="contact">
+    <div class="card reveal" style="max-width:680px; width:100%; text-align:center;">
+      <h2>Contact</h2>
+      <p style="margin-bottom:.6rem;">Let’s work together! Reach out to me via email:</p>
+      <p>
+        <a href="mailto:kirutoyoviedo@gmail.com" style="color:var(--accent); text-decoration: underline; font-weight:800;">
+          kirutoyoviedo@gmail.com
+        </a>
+      </p>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Kurt Randall S. Oviedo. All rights reserved.</p>
+  </footer>
+
+  <!-- ===== Resume Lightbox (PDF) ===== -->
+  <div class="lightbox" id="resumeLightbox" aria-hidden="true">
+    <div class="lb-inner" role="dialog" aria-modal="true" aria-label="Resume PDF Viewer">
+      <div class="lb-top">
+        <div class="lb-title" id="resumeTitle">Resume • PDF</div>
+        <div class="lb-actions">
+          <a class="lb-btn" id="resumeOpenNew" href="#" target="_blank" rel="noopener">Open</a>
+          <a class="lb-btn" id="resumeDownload" href="#" download>Download</a>
+          <button class="lb-btn" id="resumeCloseBtn" type="button">Close ✕</button>
+        </div>
+      </div>
+      <iframe id="lbPdf" title="Resume Preview"></iframe>
+    </div>
+  </div>
+
+  <script>
+    /* ===== Scroll Reveal ===== */
+    const reveals = document.querySelectorAll('.reveal');
+    const revealOnScroll = () => {
+      const triggerBottom = window.innerHeight * 0.86;
+      reveals.forEach(el => {
+        const top = el.getBoundingClientRect().top;
+        if (top < triggerBottom) el.classList.add('show');
+      });
+    };
+    window.addEventListener('scroll', revealOnScroll);
+    window.addEventListener('load', revealOnScroll);
+
+    /* ===== Active nav link ===== */
+    const sections = document.querySelectorAll("section[id]");
+    const navLinks = document.querySelectorAll("header nav a");
+
+    const setActiveLink = () => {
+      let current = "";
+      sections.forEach(sec => {
+        const sectionTop = sec.offsetTop - 130;
+        const sectionHeight = sec.offsetHeight;
+        if (pageYOffset >= sectionTop && pageYOffset < sectionTop + sectionHeight) {
+          current = sec.getAttribute("id");
+        }
+      });
+
+      navLinks.forEach(a => {
+        a.classList.remove("active");
+        if (a.getAttribute("href") === "#" + current) a.classList.add("active");
+      });
+    };
+
+    window.addEventListener("scroll", setActiveLink);
+    window.addEventListener("load", setActiveLink);
+
+    /* ===== 3D Tilt effect for project cards ===== */
+    const cards = document.querySelectorAll('.project-card');
+    cards.forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        const midX = rect.width / 2;
+        const midY = rect.height / 2;
+
+        const rotateY = ((x - midX) / midX) * 10;
+        const rotateX = -((y - midY) / midY) * 10;
+
+        card.style.transform = `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-6px)`;
+      });
+
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'perspective(900px) rotateX(0deg) rotateY(0deg) translateY(0px)';
+      });
+    });
+
+    /* ===== Resume PDF Modal (FIXED: no auto-switch bug) ===== */
+    const RESUME_PDF = "Professional CV Resume (5).pdf";
+
+    const viewResumeBtn = document.getElementById("viewResumeBtn");
+    const resumeLightbox = document.getElementById("resumeLightbox");
+    const resumeCloseBtn = document.getElementById("resumeCloseBtn");
+    const lbPdf = document.getElementById("lbPdf");
+    const resumeOpenNew = document.getElementById("resumeOpenNew");
+    const resumeDownload = document.getElementById("resumeDownload");
+
+    // Build absolute URL safely relative to the current page
+    const absURL = (path) => new URL(path, document.baseURI).href;
+
+    // Try current folder first, then parent folder (ONLY if current fails)
+    const buildCandidates = (file) => [
+      absURL(file),
+      absURL("../" + file)
+    ];
+
+    async function pickWorkingURL(urls){
+      for (const url of urls) {
+        try {
+          // HEAD sometimes blocked on simple servers; fallback to GET if needed
+          let res = await fetch(url, { method: "HEAD", cache: "no-store" });
+          if (!res.ok) res = await fetch(url, { method: "GET", cache: "no-store" });
+          if (res.ok) return url;
+        } catch (e) {
+          // try next
+        }
+      }
+      return urls[0]; // last fallback (still shows something in console)
+    }
+
+    async function openResume(){
+      const urls = buildCandidates(RESUME_PDF);
+      const goodURL = await pickWorkingURL(urls);
+
+      lbPdf.src = goodURL;
+      resumeOpenNew.href = goodURL;
+      resumeDownload.href = goodURL;
+
+      resumeLightbox.classList.add("show");
+      resumeLightbox.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeResume(){
+      resumeLightbox.classList.remove("show");
+      resumeLightbox.setAttribute("aria-hidden", "true");
+      lbPdf.src = "";
+      document.body.style.overflow = "";
+    }
+
+    viewResumeBtn.addEventListener("click", openResume);
+    resumeCloseBtn.addEventListener("click", closeResume);
+
+    resumeLightbox.addEventListener("click", (e) => {
+      if (e.target === resumeLightbox) closeResume();
+    });
+
+    window.addEventListener("keydown", (e) => {
+      if (!resumeLightbox.classList.contains("show")) return;
+      if (e.key === "Escape") closeResume();
+    });
+  </script>
+</body>
+</html>

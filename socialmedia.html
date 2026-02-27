@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Social Media Contents - Kurt Randall S. Oviedo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --accent:#00ffe7;
+      --accent2:#00b3ff;
+      --text:#f4f4f4;
+      --glass:rgba(0,0,0,.55);
+      --stroke:rgba(0,255,231,.18);
+    }
+    *{ box-sizing:border-box; margin:0; padding:0; font-family:Poppins,sans-serif; }
+    body{
+      background: url('vecteezy_abstract-luxury-glowing-lines-curved-overlapping-on-dark_11545805.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x:hidden;
+    }
+    body::before{
+      content:"";
+      position: fixed;
+      inset:0;
+      background:
+        radial-gradient(700px 450px at 15% 20%, rgba(0,255,231,.10), transparent 60%),
+        radial-gradient(900px 600px at 85% 80%, rgba(0,179,255,.10), transparent 60%),
+        linear-gradient(to bottom, rgba(0,0,0,.45), rgba(0,0,0,.72));
+      pointer-events:none;
+      z-index:-1;
+    }
+
+    header{
+      position: sticky;
+      top:0;
+      z-index:10;
+      padding: 1rem 1.2rem;
+      background: rgba(18,18,18,.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255,255,255,.06);
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .title{
+      font-weight:800;
+      color: var(--accent);
+      text-shadow: 0 0 18px rgba(0,255,231,.18);
+      white-space: nowrap;
+    }
+    .btn{
+      display:inline-block;
+      padding:.65rem 1rem;
+      border-radius: 12px;
+      text-decoration:none;
+      font-weight:700;
+      border:1px solid rgba(255,255,255,.08);
+      background: rgba(0,255,231,.08);
+      color: var(--text);
+      transition: transform .2s ease, background .2s ease;
+      cursor:pointer;
+    }
+    .btn:hover{ transform: translateY(-2px); background: rgba(0,255,231,.14); }
+
+    main{
+      width: min(1200px, 100%);
+      margin: 0 auto;
+      padding: 2rem 1.2rem 3rem;
+    }
+
+    .hero{
+      text-align:center;
+      margin: 1rem 0 1.4rem;
+    }
+    .hero h1{
+      font-size: clamp(1.9rem, 4vw, 2.8rem);
+      background: linear-gradient(to right, var(--accent), var(--accent2));
+      -webkit-background-clip:text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero p{ color: #d6d6d6; margin-top:.5rem; }
+
+    /* ===== Category Boxes (3 cards) ===== */
+    .category-grid{
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.4rem;
+      margin-top: 1.4rem;
+    }
+
+    .category-card{
+      height: 220px;
+      border-radius: 26px;
+      overflow: hidden;
+      position: relative;
+      background: rgba(0,0,0,.35);
+      border: 1px solid rgba(255,255,255,.06);
+      box-shadow: 0 14px 36px rgba(0,0,0,.55);
+      cursor:pointer;
+      transform-style: preserve-3d;
+      transition: transform .25s ease, box-shadow .25s ease, filter .25s ease;
+      isolation:isolate;
+      background-size: cover;
+      background-position: center;
+    }
+
+    /* neon border */
+    .category-card::before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      border-radius: 28px;
+      background: conic-gradient(from 180deg,
+        rgba(0,255,231,.0),
+        rgba(0,255,231,.75),
+        rgba(0,179,255,.75),
+        rgba(0,255,231,.0));
+      filter: blur(10px);
+      opacity: 0;
+      transition: opacity .35s ease;
+      animation: spinGlow 3.2s linear infinite;
+      z-index: -1;
+    }
+    @keyframes spinGlow{ to{ transform: rotate(360deg); } }
+
+    .category-card::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background: radial-gradient(700px 320px at 50% 85%, rgba(0,0,0,.78), rgba(0,0,0,.18));
+      opacity: .95;
+      transition: opacity .35s ease;
+      z-index: 0;
+      backdrop-filter: blur(2px);
+    }
+
+    .category-card .shine{
+      position:absolute;
+      inset:0;
+      background: linear-gradient(120deg,
+        transparent 0%,
+        rgba(255,255,255,.18) 35%,
+        transparent 70%);
+      transform: translateX(-140%);
+      transition: transform .75s ease;
+      z-index: 1;
+      pointer-events:none;
+    }
+
+    .category-card:hover{
+      box-shadow: 0 24px 70px rgba(0,255,231,.18), 0 18px 55px rgba(0,0,0,.55);
+      filter: saturate(1.1) contrast(1.05);
+      transform: translateY(-6px) scale(1.01);
+    }
+    .category-card:hover::before{ opacity: 1; }
+    .category-card:hover::after{ opacity: .65; }
+    .category-card:hover .shine{ transform: translateX(140%); }
+
+    .cat-label{
+      position:absolute;
+      left:0; right:0; bottom:0;
+      padding: 1rem 1rem 1.1rem;
+      font-weight: 800;
+      font-size: 1.15rem;
+      letter-spacing:.4px;
+      text-align:center;
+      color:#fff;
+      background: linear-gradient(to top, rgba(0,0,0,.88), rgba(0,0,0,.08));
+      border-top: 1px solid rgba(255,255,255,.08);
+      z-index: 2;
+      transform: translateZ(35px);
+    }
+
+    .cat-sub{
+      position:absolute;
+      top: 16px;
+      left: 16px;
+      padding: .35rem .65rem;
+      border-radius: 999px;
+      font-size: .8rem;
+      background: rgba(0,255,231,.12);
+      border: 1px solid rgba(0,255,231,.18);
+      color:#eafffd;
+      z-index: 2;
+      transform: translateZ(35px);
+    }
+
+    /* ===== Gallery ===== */
+    .gallery-header{
+      margin-top: 1.4rem;
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .gallery-title{
+      font-weight:800;
+      color: var(--accent);
+      text-shadow: 0 0 18px rgba(0,255,231,.16);
+    }
+
+    .grid{
+      margin-top: 1rem;
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 1.1rem;
+    }
+
+    .img-card{
+      border-radius: 18px;
+      overflow:hidden;
+      background: rgba(0,0,0,.35);
+      box-shadow: 0 14px 36px rgba(0,0,0,.55);
+      border: 1px solid rgba(255,255,255,.06);
+      cursor:pointer;
+      transition: transform .22s ease, box-shadow .22s ease;
+    }
+    .img-card:hover{
+      transform: translateY(-6px);
+      box-shadow: 0 24px 70px rgba(0,255,231,.16), 0 18px 55px rgba(0,0,0,.55);
+    }
+
+    .thumb{
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+      display:block;
+    }
+
+    .pdf-thumb{
+      width: 100%;
+      height: 240px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      flex-direction:column;
+      gap:.35rem;
+      background: rgba(0,0,0,.6);
+      font-size: 3rem;
+    }
+    .pdf-thumb span{
+      font-size:.95rem;
+      font-weight:800;
+      opacity:.95;
+    }
+
+    .img-meta{
+      padding: .65rem .8rem;
+      font-weight:700;
+      font-size: .92rem;
+      color:#fff;
+      white-space: nowrap;
+      overflow:hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* Views */
+    #viewCategories{ display:block; }
+    #viewGallery{ display:none; }
+
+    /* Lightbox */
+    .lightbox{
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.85);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      z-index: 999;
+      padding: 1.2rem;
+    }
+    .lightbox.show{ display:flex; }
+
+    .lb-inner{
+      width: min(1100px, 100%);
+      background: rgba(0,0,0,.45);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 18px;
+      overflow:hidden;
+      box-shadow: 0 30px 90px rgba(0,0,0,.65);
+    }
+    .lb-top{
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: .85rem 1rem;
+      background: rgba(18,18,18,.65);
+      border-bottom: 1px solid rgba(255,255,255,.06);
+      flex-wrap: wrap;
+    }
+    .lb-title{ font-weight: 800; color: var(--accent); }
+    .lb-actions{ display:flex; gap: .5rem; }
+    .lb-btn{
+      padding:.55rem .8rem;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+      cursor:pointer;
+    }
+    .lb-btn:hover{ background: rgba(0,255,231,.12); }
+
+    .lb-img{
+      width: 100%;
+      max-height: 78vh;
+      object-fit: contain;
+      background: rgba(0,0,0,.6);
+      display:block;
+    }
+
+    footer{
+      text-align:center;
+      color:#a0a0a0;
+      padding: 1.4rem 0 .2rem;
+      font-size: .95rem;
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      *{ scroll-behavior: auto; }
+      .category-card, .img-card{ transition:none; }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="title">Social Media Contents</div>
+    <a class="btn" href="index.html#projects">← Back</a>
+  </header>
+
+  <main>
+    <div class="hero">
+      <h1>My Social Media Works</h1>
+      <p>Choose a category to view all designs inside.</p>
+    </div>
+
+    <!-- VIEW 1: Categories (3 boxes) -->
+    <section id="viewCategories">
+      <div class="category-grid">
+        <div class="category-card" data-cat="posts">
+          <div class="shine"></div>
+          <div class="cat-sub">Category</div>
+          <div class="cat-label">Social Media Post</div>
+        </div>
+
+        <div class="category-card" data-cat="branding">
+          <div class="shine"></div>
+          <div class="cat-sub">Category</div>
+          <div class="cat-label">Branding</div>
+        </div>
+
+        <div class="category-card" data-cat="carousel">
+          <div class="shine"></div>
+          <div class="cat-sub">Category</div>
+          <div class="cat-label">Carousel</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW 2: Gallery -->
+    <section id="viewGallery">
+      <div class="gallery-header">
+        <div class="gallery-title" id="galleryTitle">Gallery</div>
+        <button class="btn" id="backToCatsBtn">← Back to Categories</button>
+      </div>
+
+      <div class="grid" id="grid"></div>
+      <footer>© 2025 Kurt Randall S. Oviedo</footer>
+    </section>
+  </main>
+
+  <!-- Lightbox (images only) -->
+  <div class="lightbox" id="lightbox">
+    <div class="lb-inner">
+      <div class="lb-top">
+        <div class="lb-title" id="lbTitle">Preview</div>
+        <div class="lb-actions">
+          <button class="lb-btn" id="prevBtn">Prev</button>
+          <button class="lb-btn" id="nextBtn">Next</button>
+          <button class="lb-btn" id="closeBtn">Close ✕</button>
+        </div>
+      </div>
+
+      <img class="lb-img" id="lbImg" src="" alt="Preview">
+    </div>
+  </div>
+
+  <script>
+    // ===== DATA =====
+    const data = {
+      posts: [
+        "socialmed/1 post.png",
+        "socialmed/1 post (2).png",
+        "socialmed/1 post (3).png",
+        "socialmed/1 post (4).png",
+        "socialmed/1 post (5).png",
+        "socialmed/26.png",
+        "socialmed/115.png",
+        "socialmed/F1.png",
+        "socialmed/F2.png",
+        "socialmed/F3.png",
+        "socialmed/F4.png",
+        "socialmed/F5.png",
+        "socialmed/F6.png",
+        "socialmed/F7.png",
+        "socialmed/F8.png",
+        "socialmed/F9.png",
+        "socialmed/F10.png",
+        "socialmed/F11.png",
+        "socialmed/F12.png"
+      ],
+
+      branding: [
+        "socialmed/BRANDING/TEMPLATE.png",
+        "socialmed/BRANDING/1.png",
+        "socialmed/BRANDING/2.png",
+        "socialmed/BRANDING/3.png",
+        "socialmed/BRANDING/4.png",
+        "socialmed/BRANDING/5.png",
+        "socialmed/BRANDING/6.png",
+        "socialmed/BRANDING/7.png",
+        "socialmed/BRANDING/8.png",
+        "socialmed/BRANDING/9.png",
+        "socialmed/BRANDING/10.png",
+        "socialmed/BRANDING/11.png",
+        "socialmed/BRANDING/12.png",
+        "socialmed/BRANDING/13.png",
+        "socialmed/BRANDING/14.png",
+        "socialmed/BRANDING/LUXURY.png",
+        "socialmed/BRANDING/PIZZA BLISS.png",
+        "socialmed/BRANDING/TEMPLATE.png",
+        "socialmed/BRANDING/unnamed (1).png",
+        "socialmed/BRANDING/unnamed (2).png",
+        "socialmed/BRANDING/unnamed.png",
+        "socialmed/BRANDING/ADMINLIFE.pdf"
+      ],
+
+      carousel: [
+        "socialmed/CAROUSEL/111.png",
+        "socialmed/CAROUSEL/112.png",
+        "socialmed/CAROUSEL/113.png",
+        "socialmed/CAROUSEL/114.png",
+        "socialmed/CAROUSEL/115.png",
+        "socialmed/CAROUSEL/127.png",
+        "socialmed/CAROUSEL/128.png",
+        "socialmed/CAROUSEL/129.png",
+        "socialmed/CAROUSEL/130.png",
+        "socialmed/CAROUSEL/131.png",
+        "socialmed/CAROUSEL/132.png",
+        "socialmed/CAROUSEL/133.png",
+        "socialmed/CAROUSEL/134.png",
+        "socialmed/CAROUSEL/135.png",
+        "socialmed/CAROUSEL/136.png",
+        "socialmed/CAROUSEL/137.png",
+        "socialmed/CAROUSEL/138.png",
+        "socialmed/CAROUSEL/139.png",
+        "socialmed/CAROUSEL/140.png",
+        "socialmed/CAROUSEL/141.png",
+        "socialmed/CAROUSEL/142.png",
+        "socialmed/CAROUSEL/143.png",
+        "socialmed/CAROUSEL/144.png",
+        "socialmed/CAROUSEL/145.png",
+        "socialmed/CAROUSEL/A1.png",
+        "socialmed/CAROUSEL/A2.png",
+        "socialmed/CAROUSEL/A3.png",
+        "socialmed/CAROUSEL/A4.png",
+        "socialmed/CAROUSEL/A5.png",
+        "socialmed/CAROUSEL/carousel -How to build consistency with low-effort systems (weekly checklist).png",
+        "socialmed/CAROUSEL/carousel -How to build consistency with low-effort systems (weekly checklist) (2).png",
+        "socialmed/CAROUSEL/carousel -How to build consistency with low-effort systems (weekly checklist) (3).png",
+        "socialmed/CAROUSEL/carousel -How to build consistency with low-effort systems (weekly checklist) (4).png",
+        "socialmed/CAROUSEL/carousel -How to build consistency with low-effort systems (weekly checklist) (5).png",
+        "socialmed/CAROUSEL/carousel -How to build consistency with low-effort systems (weekly checklist) (6).png",
+        "socialmed/CAROUSEL/carousel -How to build consistency with low-effort systems (weekly checklist) (7).png",
+        "socialmed/CAROUSEL/Carousel.png",
+        "socialmed/CAROUSEL/Carousel (2).png",
+        "socialmed/CAROUSEL/Carousel (3).png",
+        "socialmed/CAROUSEL/Carousel (4).png",
+        "socialmed/CAROUSEL/Carousel (5).png",
+        "socialmed/CAROUSEL/Carousel (6).png",
+        "socialmed/CAROUSEL/Carousel- 5 ways to increase visibility today.png",
+        "socialmed/CAROUSEL/Carousel- 5 ways to increase visibility today (2).png",
+        "socialmed/CAROUSEL/Carousel- 5 ways to increase visibility today (3).png",
+        "socialmed/CAROUSEL/Carousel- 5 ways to increase visibility today (4).png",
+        "socialmed/CAROUSEL/Carousel- 5 ways to increase visibility today (5).png",
+        "socialmed/CAROUSEL/Carousel- 5 ways to increase visibility today (6).png",
+        "socialmed/CAROUSEL/Carousel- 5 ways to increase visibility today (7).png",
+        "socialmed/CAROUSEL/Carousel- Signs your brand identity needs a glow-up.png",
+        "socialmed/CAROUSEL/Carousel- Signs your brand identity needs a glow-up (2).png",
+        "socialmed/CAROUSEL/Carousel- Signs your brand identity needs a glow-up (3).png",
+        "socialmed/CAROUSEL/Carousel- Signs your brand identity needs a glow-up (4).png",
+        "socialmed/CAROUSEL/Carousel- Signs your brand identity needs a glow-up (5).png",
+        "socialmed/CAROUSEL/Carousel- Signs your brand identity needs a glow-up (6).png",
+        "socialmed/CAROUSEL/Carousel- Signs your brand identity needs a glow-up (7).png",
+        "socialmed/CAROUSEL/Carousel- What shadowban actually means + how to recover.png",
+        "socialmed/CAROUSEL/Carousel- What shadowban actually means + how to recover (2).png",
+        "socialmed/CAROUSEL/Carousel- What shadowban actually means + how to recover (3).png",
+        "socialmed/CAROUSEL/Carousel- What shadowban actually means + how to recover (4).png",
+        "socialmed/CAROUSEL/Carousel- What shadowban actually means + how to recover (5).png",
+        "socialmed/CAROUSEL/Carousel- What shadowban actually means + how to recover (6).png",
+        "socialmed/CAROUSEL/Carousel- What shadowban actually means + how to recover (7).png",
+        "socialmed/CAROUSEL/Carousel-3 KPIs that actually matter for small brands.png",
+        "socialmed/CAROUSEL/Carousel-3 KPIs that actually matter for small brands (2).png",
+        "socialmed/CAROUSEL/Carousel-3 KPIs that actually matter for small brands (3).png",
+        "socialmed/CAROUSEL/Carousel-3 KPIs that actually matter for small brands (4).png",
+        "socialmed/CAROUSEL/Carousel-3 KPIs that actually matter for small brands (5).png",
+        "socialmed/CAROUSEL/Carousel-CTA frameworks_ How to turn scrollers into buyers.png",
+        "socialmed/CAROUSEL/Carousel-CTA frameworks_ How to turn scrollers into buyers (2).png",
+        "socialmed/CAROUSEL/Carousel-CTA frameworks_ How to turn scrollers into buyers (3).png",
+        "socialmed/CAROUSEL/Carousel-CTA frameworks_ How to turn scrollers into buyers (4).png",
+        "socialmed/CAROUSEL/Carousel-CTA frameworks_ How to turn scrollers into buyers (5).png",
+        "socialmed/CAROUSEL/Carousel-CTA frameworks_ How to turn scrollers into buyers (6).png",
+        "socialmed/CAROUSEL/Carousel-How to Actually Win in the 2025 Marketing Paradox.png",
+        "socialmed/CAROUSEL/Carousel-How to Actually Win in the 2025 Marketing Paradox (2).png",
+        "socialmed/CAROUSEL/Carousel-How to Actually Win in the 2025 Marketing Paradox (3).png",
+        "socialmed/CAROUSEL/Carousel-How to Actually Win in the 2025 Marketing Paradox (4).png",
+        "socialmed/CAROUSEL/Carousel-How to Actually Win in the 2025 Marketing Paradox (5).png",
+        "socialmed/CAROUSEL/Carousel-How to Actually Win in the 2025 Marketing Paradox (6).png",
+        "socialmed/CAROUSEL/Carousel-How to Actually Win in the 2025 Marketing Paradox (7).png",
+        "socialmed/CAROUSEL/Carousel-How to flip your scroll habit into content inspiration.png",
+        "socialmed/CAROUSEL/Carousel-How to flip your scroll habit into content inspiration (2).png",
+        "socialmed/CAROUSEL/Carousel-How to flip your scroll habit into content inspiration (3).png",
+        "socialmed/CAROUSEL/Carousel-How to flip your scroll habit into content inspiration (4).png",
+        "socialmed/CAROUSEL/Carousel-How to flip your scroll habit into content inspiration (5).png",
+        "socialmed/CAROUSEL/Carousel-How to flip your scroll habit into content inspiration (6).png",
+        "socialmed/CAROUSEL/Carousel-How to raise your rates without losing clients (positioning tips).png",
+        "socialmed/CAROUSEL/Carousel-How to raise your rates without losing clients (positioning tips) (2).png",
+        "socialmed/CAROUSEL/Carousel-How to raise your rates without losing clients (positioning tips) (3).png",
+        "socialmed/CAROUSEL/Carousel-How to raise your rates without losing clients (positioning tips) (4).png",
+        "socialmed/CAROUSEL/Carousel-How to raise your rates without losing clients (positioning tips) (5).png",
+        "socialmed/CAROUSEL/Carousel-How to raise your rates without losing clients (positioning tips) (6).png",
+        "socialmed/CAROUSEL/Carousel-How to raise your rates without losing clients (positioning tips) (7).png",
+        "socialmed/CAROUSEL/carousel-What messaging.png",
+        "socialmed/CAROUSEL/carousel-What messaging actually builds trust (and what no one’s reading anymore) (2).png",
+        "socialmed/CAROUSEL/carousel-What messaging actually builds trust (and what no one’s reading anymore) (3).png",
+        "socialmed/CAROUSEL/carousel-What messaging actually builds trust (and what no one’s reading anymore) (4).png",
+        "socialmed/CAROUSEL/Carousel-Why brands are winning with micro collabs + how to find the right partners.png",
+        "socialmed/CAROUSEL/Carousel-Why brands are winning with micro collabs + how to find the right partners (2).png",
+        "socialmed/CAROUSEL/Carousel-Why brands are winning with micro collabs + how to find the right partners (3).png",
+        "socialmed/CAROUSEL/Carousel-Why brands are winning with micro collabs + how to find the right partners (4).png",
+        "socialmed/CAROUSEL/Carousel-Why brands are winning with micro collabs + how to find the right partners (5).png",
+        "socialmed/CAROUSEL/Carousel-Why brands are winning with micro collabs + how to find the right partners (6).png",
+        "socialmed/CAROUSEL/Educational Carousel Aug20 slide1.png",
+        "socialmed/CAROUSEL/Educational Carousel Aug20 Slide2.png",
+        "socialmed/CAROUSEL/Educational Carousel Aug20 Slide3.png",
+        "socialmed/CAROUSEL/Educational Carousel Aug20 slide4.png",
+        "socialmed/CAROUSEL/Educational Carousel Aug20 slide5.png",
+        "socialmed/CAROUSEL/Educational Carousel Aug21 Slide1.png",
+        "socialmed/CAROUSEL/Educational Carousel Aug21 Slide2.png",
+        "socialmed/CAROUSEL/Educational Carousel Aug21 Slide3.png",
+        "socialmed/CAROUSEL/Educational Carousel Aug21 Slide4.png",
+        "socialmed/CAROUSEL/Educational Carousel Aug21 Slide5.png",
+        "socialmed/CAROUSEL/Educational Carousel Aug21 Slide6.png",
+        "socialmed/CAROUSEL/Funny post Aug20 (5).png",
+        "socialmed/CAROUSEL/Funny post Aug20 (6).png",
+        "socialmed/CAROUSEL/Funny post Aug20 (7).png",
+        "socialmed/CAROUSEL/Funny post Aug20 (8).png",
+        "socialmed/CAROUSEL/Funny post Aug20 (9).png"
+      ]
+    };
+
+    const labels = {
+      posts: "Social Media Post",
+      branding: "Branding",
+      carousel: "Carousel"
+    };
+
+    // ===== DOM =====
+    const viewCategories = document.getElementById("viewCategories");
+    const viewGallery = document.getElementById("viewGallery");
+    const grid = document.getElementById("grid");
+    const galleryTitle = document.getElementById("galleryTitle");
+    const backToCatsBtn = document.getElementById("backToCatsBtn");
+
+    const lightbox = document.getElementById("lightbox");
+    const lbImg = document.getElementById("lbImg");
+    const lbTitle = document.getElementById("lbTitle");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const closeBtn = document.getElementById("closeBtn");
+
+    let currentCat = "posts";
+    let currentIndex = 0;
+
+    // ✅ Make absolute URL (handles spaces/special chars properly)
+    const absURL = (path) => new URL(path, document.baseURI).href;
+
+    // ✅ Candidates: current folder then parent folder
+    const candidates = (path) => [absURL(path), absURL("../" + path)];
+
+    // ✅ verify which URL exists (fix for PDFs + broken paths)
+    async function pickWorkingURL(urls){
+      for (const url of urls) {
+        try {
+          let res = await fetch(url, { method: "HEAD", cache: "no-store" });
+          if (!res.ok) res = await fetch(url, { method: "GET", cache: "no-store" });
+          if (res.ok) return url;
+        } catch (e) {}
+      }
+      return urls[0];
+    }
+
+    // ✅ pick a preview image (prefer non-pdf)
+    const pickPreview = (list) => {
+      if (!Array.isArray(list)) return null;
+      const img = list.find(p => !String(p).toLowerCase().endsWith(".pdf"));
+      return img || list[0] || null;
+    };
+
+    // ✅ auto-set category backgrounds based on first image inside
+    async function setCategoryBackgrounds() {
+      const cards = document.querySelectorAll(".category-card");
+      for (const card of cards) {
+        const cat = card.dataset.cat;
+        const list = data[cat] || [];
+        const preview = pickPreview(list);
+        if (!preview) continue;
+
+        const goodURL = await pickWorkingURL(candidates(preview));
+        card.style.backgroundImage = `url('${goodURL}')`;
+      }
+    }
+
+    // ===== VIEWS =====
+    function showCategories(){
+      viewCategories.style.display = "block";
+      viewGallery.style.display = "none";
+      grid.innerHTML = "";
+    }
+
+    function showGallery(cat){
+      currentCat = cat;
+      const list = data[cat] || [];
+      galleryTitle.textContent = labels[cat] + " • (" + list.length + " items)";
+
+      viewCategories.style.display = "none";
+      viewGallery.style.display = "block";
+
+      grid.innerHTML = list.map((src, idx) => {
+        const name = src.split("/").pop();
+        const isPDF = src.toLowerCase().endsWith(".pdf");
+
+        return `
+          <div class="img-card" data-index="${idx}">
+            ${
+              isPDF
+              ? `<div class="pdf-thumb">📄 <span>Open PDF</span></div>`
+              : `<img class="thumb" data-src="${src}" src="${candidates(src)[0]}" alt="${name}" loading="lazy">`
+            }
+            <div class="img-meta" title="${name}">${name}</div>
+          </div>
+        `;
+      }).join("");
+
+      // image fallback loader
+      document.querySelectorAll(".thumb[data-src]").forEach(async img => {
+        const original = img.getAttribute("data-src");
+        const goodURL = await pickWorkingURL(candidates(original));
+        img.src = goodURL;
+      });
+    }
+
+    // Category click
+    document.querySelectorAll(".category-card").forEach(card => {
+      card.addEventListener("click", () => showGallery(card.dataset.cat));
+    });
+    backToCatsBtn.addEventListener("click", showCategories);
+
+    // ===== LIGHTBOX =====
+    async function openLightbox(index){
+      const list = data[currentCat] || [];
+      if(!list.length) return;
+
+      currentIndex = Math.max(0, Math.min(index, list.length - 1));
+      const src = list[currentIndex];
+      const isPDF = src.toLowerCase().endsWith(".pdf");
+
+      if (isPDF) {
+        const goodPDF = await pickWorkingURL(candidates(src));
+        window.open(goodPDF, "_blank", "noopener");
+        return;
+      }
+
+      const goodIMG = await pickWorkingURL(candidates(src));
+      lbImg.src = goodIMG;
+
+      lbTitle.textContent = labels[currentCat] + " • " + (currentIndex + 1) + "/" + list.length;
+      lightbox.classList.add("show");
+    }
+
+    function next(){
+      const list = data[currentCat] || [];
+      if(!list.length) return;
+      currentIndex = (currentIndex + 1) % list.length;
+
+      let safety = 0;
+      while (String(list[currentIndex]).toLowerCase().endsWith(".pdf") && safety < list.length) {
+        currentIndex = (currentIndex + 1) % list.length;
+        safety++;
+      }
+      openLightbox(currentIndex);
+    }
+
+    function prev(){
+      const list = data[currentCat] || [];
+      if(!list.length) return;
+      currentIndex = (currentIndex - 1 + list.length) % list.length;
+
+      let safety = 0;
+      while (String(list[currentIndex]).toLowerCase().endsWith(".pdf") && safety < list.length) {
+        currentIndex = (currentIndex - 1 + list.length) % list.length;
+        safety++;
+      }
+      openLightbox(currentIndex);
+    }
+
+    function close(){
+      lightbox.classList.remove("show");
+      lbImg.src = "";
+    }
+
+    grid.addEventListener("click", (e) => {
+      const card = e.target.closest(".img-card");
+      if(!card) return;
+      openLightbox(parseInt(card.dataset.index, 10));
+    });
+
+    nextBtn.addEventListener("click", next);
+    prevBtn.addEventListener("click", prev);
+    closeBtn.addEventListener("click", close);
+    lightbox.addEventListener("click", (e) => { if(e.target === lightbox) close(); });
+
+    window.addEventListener("keydown", (e) => {
+      if(!lightbox.classList.contains("show")) return;
+      if(e.key === "Escape") close();
+      if(e.key === "ArrowRight") next();
+      if(e.key === "ArrowLeft") prev();
+    });
+
+    // Start
+    setCategoryBackgrounds();
+    showCategories();
+  </script>
+</body>
+</html>
